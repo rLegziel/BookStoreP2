@@ -34,14 +34,14 @@ public class BookCursorAdapter extends CursorAdapter {
         TextView nameTV = view.findViewById(R.id.name);
         TextView priceTV = view.findViewById(R.id.price_int);
         final TextView quantityTV = view.findViewById(R.id.quantity_int);
-        final Button buyButton = view.findViewById(R.id.btn_buy);
+        final Button buyButton = view.findViewById(R.id.button_buy);
 
-//        find the column we're looking for
+//        params for the columns
         int nameColumnIndex = cursor.getColumnIndex(BookEntry.BOOK_NAME);
         int priceColumnIndex = cursor.getColumnIndex(BookEntry.BOOK_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(BookEntry.BOOK_QUANTITY);
 
-//      find the item attributes we want to bind
+//      params for the attributes to change
         String bookName = cursor.getString(nameColumnIndex);
         int bookPrice = cursor.getInt(priceColumnIndex);
         final int bookQuantity = cursor.getInt(quantityColumnIndex);
@@ -51,8 +51,8 @@ public class BookCursorAdapter extends CursorAdapter {
         priceTV.setText(Integer.toString(bookPrice));
         quantityTV.setText(Integer.toString(bookQuantity));
 
-//       Order logic
-        buyButton.setText(R.string.buy_btn);
+//       buy button
+        buyButton.setText(R.string.buy_button);
 
 /**
  * Reduces the number of books in the stock when clicked
@@ -67,7 +67,7 @@ public class BookCursorAdapter extends CursorAdapter {
                 }
                 if (updatedQuantity == 0) {
                     buyButton.setEnabled(false);
-                    Toast.makeText(context, "Stock exhausted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "there are 0 units in stock", Toast.LENGTH_SHORT).show();
                 }
                 ContentValues values = new ContentValues();
                 values.put(BookContract.BookEntry.BOOK_QUANTITY, updatedQuantity);

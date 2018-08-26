@@ -9,6 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +17,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.example.android.bookstorep2.data.BookContract.BookEntry;
-import android.support.design.widget.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -30,9 +31,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.inventory);
+        setTitle(R.string.books);
 
-//         Open the editorView
+
+        //        FAB to open the editor activity
         FloatingActionButton btn = findViewById(R.id.fab);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +44,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-//      Find the listView to populate
+
+        ///     Find the listView to populate
         ListView listView = findViewById(R.id.list);
-//      Set the emptyView
+
+        //      Set the emptyView
         View emptyView = findViewById(R.id.empty_view);
         listView.setEmptyView(emptyView);
-//      Setting the list item adapter for the data fetched by the cursor
+
+
+        //      Setting the list item adapter for the data fetched by the cursor
         mCursorAdapter = new BookCursorAdapter(this, null);
         listView.setAdapter(mCursorAdapter);
 
@@ -64,24 +70,20 @@ public class MainActivity extends AppCompatActivity
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
     }
 
-    /**
-     * Previewed Book setup
-     */
     private void insertBook() {
 
         ContentValues values = new ContentValues();
-        values.put(BookEntry.BOOK_NAME, "Philosophy Book");
-        values.put(BookEntry.BOOK_PRICE, 47);
-        values.put(BookEntry.BOOK_QUANTITY, 8);
-        values.put(BookEntry.BOOK_SUPPLIER_NAME, "Poliform");
-        values.put(BookEntry.BOOK_SUPPLIER_PHONE, "0021145523");
+        values.put(BookEntry.BOOK_NAME, "Slaughterhouse-5");
+        values.put(BookEntry.BOOK_PRICE, 55);
+        values.put(BookEntry.BOOK_QUANTITY, 7);
+        values.put(BookEntry.BOOK_SUPPLIER_NAME, "Random");
+        values.put(BookEntry.BOOK_SUPPLIER_PHONE, "0012345678");
 
         getContentResolver().insert(BookEntry.CONTENT_URI, values);
     }
 
-    /**
-     * Menu logic
-     */
+
+
 
     private void deleteAllBooks() {
         getContentResolver().delete(BookEntry.CONTENT_URI, null, null);
@@ -106,7 +108,6 @@ public class MainActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-//        return super.onOptionsItemSelected(item);
     }
 
     @Override
