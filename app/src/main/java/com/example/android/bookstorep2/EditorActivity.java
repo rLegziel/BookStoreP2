@@ -94,13 +94,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         final Button decrementBtn = findViewById(R.id.decrement);
         int qty = 0;
         mQuantityTextView.setText(String.valueOf(qty));
-        // Set click listener on the increase button and increase the quantity
-        // according the adjustment factor, check for validation before changing data
+        //onclick listener for increment and decrement buttons
         incrementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int newQuantity = Integer.parseInt(mQuantityTextView.getText().toString().trim());
-                mQuantityTextView.setText(String.valueOf(newQuantity + 1));
+                mQuantityTextView.setText(String.valueOf(newQuantity = 1));
             }
         });
         decrementBtn.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +107,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View view) {
                 int newQuantity = Integer.parseInt(mQuantityTextView.getText().toString().trim());
                 mQuantityTextView.setText(String.valueOf(newQuantity - 1));
-                if (newQuantity == 1) {
+                if (newQuantity == 0) {
                     decrementBtn.setEnabled(false);
                 }
             }

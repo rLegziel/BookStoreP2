@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        ///     Find the listView to populate
+
         ListView listView = findViewById(R.id.list);
 
         //      Set the emptyView
@@ -53,11 +53,10 @@ public class MainActivity extends AppCompatActivity
         listView.setEmptyView(emptyView);
 
 
-        //      Setting the list item adapter for the data fetched by the cursor
         mCursorAdapter = new BookCursorAdapter(this, null);
         listView.setAdapter(mCursorAdapter);
 
-//      List item on click listener
+        // List item onclick listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity
 
     private void deleteAllBooks() {
         getContentResolver().delete(BookEntry.CONTENT_URI, null, null);
-        Toast.makeText(this, "All entries are successfully deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "All entries were deleted", Toast.LENGTH_SHORT).show();
     }
 
     @Override
