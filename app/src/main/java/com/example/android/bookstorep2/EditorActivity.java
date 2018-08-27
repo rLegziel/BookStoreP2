@@ -65,7 +65,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mCurrentBookUri = intent.getData();
 
 
-
         if (mCurrentBookUri == null) {
             setTitle("Add a new book");
             invalidateOptionsMenu();
@@ -107,6 +106,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View view) {
                 int newQuantity = Integer.parseInt(mQuantityTextView.getText().toString().trim());
                 mQuantityTextView.setText(String.valueOf(newQuantity - 1));
+                // if quantity is 0, disable decrement button
                 if (newQuantity == 0) {
                     decrementBtn.setEnabled(false);
                 }
@@ -115,9 +115,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         TextView saveBtn = findViewById(R.id.save_btn);
         TextView callBtn = findViewById(R.id.call_btn);
-//        if (mCurrentBookUri == null) {
-//            callBtn.setVisibility(View.GONE);
-//        }
+
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +124,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-        /**
-         * Open dial Intent
-         */
+        // logic for dialing the supplier with dial intent
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
