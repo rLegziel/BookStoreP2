@@ -98,14 +98,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             @Override
             public void onClick(View view) {
                 int newQuantity = Integer.parseInt(mQuantityTextView.getText().toString().trim());
-                mQuantityTextView.setText(String.valueOf(newQuantity = 1));
+                newQuantity++;
+                mQuantityTextView.setText(String.valueOf(newQuantity));
             }
         });
         decrementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int newQuantity = Integer.parseInt(mQuantityTextView.getText().toString().trim());
-                mQuantityTextView.setText(String.valueOf(newQuantity - 1));
+                if (newQuantity > 0) {
+                    decrementBtn.setEnabled(true);
+                    mQuantityTextView.setText(String.valueOf(newQuantity - 1));
+                }
                 // if quantity is 0, disable decrement button
                 if (newQuantity == 0) {
                     decrementBtn.setEnabled(false);
